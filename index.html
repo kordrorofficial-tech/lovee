@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Love 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
+        overflow: hidden;
+    }
+
+    .fireworks {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top, rgba(255,255,255,0.3), transparent 60%);
+        animation: flash 2s infinite;
+        pointer-events: none;
+    }
+
+    @keyframes flash {
+        0%,100% {opacity:0.3;}
+        50% {opacity:0.6;}
+    }
+
+    .card {
+        background: rgba(255,255,255,0.9);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        width: 340px;
+        z-index: 2;
+    }
+
+    h1 {
+        color: #e91e63;
+        font-size: 22px;
+    }
+
+    p {
+        color: #e91e63;
+        font-size: 18px;
+    }
+
+    button {
+        border: none;
+        padding: 12px 24px;
+        margin: 10px;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .love {
+        background: #e91e63;
+        color: white;
+    }
+
+    .nolove {
+        background: #ccc;
+    }
+
+    .heart {
+        position: absolute;
+        color: pink;
+        font-size: 24px;
+        animation: floatUp 2s linear forwards;
+    }
+
+    @keyframes floatUp {
+        from {transform: translateY(0); opacity:1;}
+        to {transform: translateY(-100px); opacity:0;}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="fireworks"></div>
+
+<div class="card" id="card">
+    <h1>เค้ารักแฟนมาก</h1>
+    <p>HAPPY NEW YEAR 🎉</p>
+    <p>อยู่กับเค้าไปอีกหลาย ๆ ปีเลยนะ</p>
+    <button class="love" onclick="love()">รัก</button>
+    <button class="nolove" onclick="noLove()">ไม่รัก</button>
+</div>
+
+<!-- เสียง -->
+<audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/30/audio_1d7c4d2b75.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="click">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_20c5ff0b7a.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const bgm = document.getElementById("bgm");
+const click = document.getElementById("click");
+
+function love() {
+    click.play();
+    bgm.volume = 0.4;
+    bgm.play();
+
+    document.getElementById("card").innerHTML = `
+        <h1>เค้าก็รักแฟนมาก</h1>
+        <p>HAPPY NEW YEAR 🎉</p>
+        <p>อยู่กับเค้าไปอีกหลาย ๆ ปีเลยนะ</p>
+    `;
+    hearts();
+}
+
+function noLove() {
+    click.play();
+    document.getElementById("card").innerHTML = `
+        <h1>ไม่รักจริงอ่อ 😿</h1>
+    `;
+    setTimeout(() => location.reload(), 1500);
+}
+
+function hearts() {
+    for(let i=0;i<20;i++){
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.innerText = "❤️";
+        h.style.left = Math.random()*100 + "vw";
+        h.style.bottom = "0px";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),2000);
+    }
+}
+</script>
+
+</body>
+</html>
